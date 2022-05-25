@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="search" type="search" placeholder="Enter movie name">
+    <button onclick="myfunction()">Search</button>
+    <br>
+    <br>
+    <div>
+
+    </div>
+</body>
+</html>
+<script>
+    function myfunction(){
+        var url="http://www.omdbapi.com/?i=tt3896198&apikey=6e066e2a";
+        var a=document.querySelector("#search").value;
+        async function getdata(){
+            try{
+            var b= await fetch(url);
+            var c= await b.json();
+            if(a==c.Title){
+            console.log(c)
+            var title=document.createElement("h2");
+              title.innerText="Title: " +c.Title
+            var image=document.createElement("img");
+              image.src=c.Poster
+              var bo=document.createElement("h3");
+              bo.innerText="Box Office: "+c.BoxOffice
+              var di=document.createElement("h3");
+              di.innerText="Director "+c.Director
+              var ac=document.createElement("h3");
+              ac.innerText="Actors: "+c.Actors
+              
+              var pl=document.createElement("h3");
+              pl.innerText="Plot: "+c.Plot
+
+              if(c.imdbRating>=8.5){
+                var im1=document.createElement("h3");
+              im1.innerText="Rating: "+c.imdbRating + "recommended"
+              }
+              else{
+                var im1=document.createElement("h3");
+              im1.innerText="Rating: "+c.imdbRating 
+              }
+              
+            //   var title=document.createElement("h2");
+            //   title.innertext=c.Title
+
+
+              document.querySelector("div").append(title,image,bo,di,ac,pl,im1);
+           
+            }
+            
+        }
+        catch(err){
+            console.log(err)
+        }
+        }
+        getdata();
+    }
+    // function append(data){
+    //     var s= document.querySelector("div");
+    //     data.forEach(function(el){
+    //     var image=document.createElement("img");
+    //     image.src=el.Poster
+    //     s.append(image)
+
+    //  });
+    
+        
+     
+    // }
+</script>
